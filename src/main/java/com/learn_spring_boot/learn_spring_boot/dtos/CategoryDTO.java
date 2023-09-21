@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class CategoryDto {
+public class CategoryDTO {
     @NotEmpty(message = "Category's name cannot be empty")
     private String name;
 }
