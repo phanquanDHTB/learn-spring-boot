@@ -39,6 +39,15 @@ public class WebSecurityConfig {
                             .requestMatchers(HttpMethod.DELETE, "api/v1/products/**").hasAnyRole(Role.ADMIN)
                             .requestMatchers(HttpMethod.POST, "api/v1/products").hasAnyRole(Role.ADMIN)
                             .requestMatchers(HttpMethod.PUT, "api/v1/products/**").hasAnyRole(Role.ADMIN)
+
+                            .requestMatchers(HttpMethod.GET, "api/v1/order/**").permitAll()
+                            .requestMatchers(HttpMethod.DELETE, "api/v1/order/**").hasAnyRole(Role.ADMIN)
+                            .requestMatchers(HttpMethod.POST, "api/v1/products").permitAll()
+
+                            .requestMatchers(HttpMethod.GET, "api/v1/orderdetail/**").permitAll()
+
+                            .requestMatchers(HttpMethod.POST, "api/v1/upload").hasAnyRole(Role.ADMIN)
+                            .requestMatchers(HttpMethod.GET, "api/v1/upload/images/**").permitAll()
                     ;
                 })
                 .csrf(AbstractHttpConfigurer::disable);

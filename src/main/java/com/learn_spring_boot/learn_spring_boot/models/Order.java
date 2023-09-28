@@ -48,7 +48,7 @@ public class Order {
     @Column(name = "total_money")
     private Float totalMoney;
 
-    @Column(name = "shupping_method", length = 100)
+    @Column(name = "shopping_method", length = 100)
     private String shippingMethod;
 
     @Column(name = "shipping_address")
