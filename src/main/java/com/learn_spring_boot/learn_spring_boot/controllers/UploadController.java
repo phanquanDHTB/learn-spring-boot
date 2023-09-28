@@ -3,12 +3,10 @@ package com.learn_spring_boot.learn_spring_boot.controllers;
 import com.learn_spring_boot.learn_spring_boot.util.DateUtil;
 import com.learn_spring_boot.learn_spring_boot.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.OutputStream;
@@ -47,6 +45,26 @@ public class UploadController {
             return ResponseEntity.ok(ResponseEntity.ok(img));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @GetMapping("/images/{imageName}")
+    public ResponseEntity<?> viewImage(@PathVariable String imageName) {
+        try {
+            java.nio.file.Path imagePath = Paths.get("static/images/"+imageName);
+            UrlResource resource = new UrlResource(imagePath.toUri());
+
+            if (resource.exists()) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .body(resource);
+            } else {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .body(new UrlResource(Paths.get("static/images/23092023093146ÂNH.jpg").toUri()));
+                //return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
         }
     }
 }
