@@ -42,7 +42,7 @@ public class WebSecurityConfig {
 
                             .requestMatchers(HttpMethod.GET, "api/v1/order/**").permitAll()
                             .requestMatchers(HttpMethod.DELETE, "api/v1/order/**").hasAnyRole(Role.ADMIN)
-                            .requestMatchers(HttpMethod.POST, "api/v1/products").permitAll()
+                            .requestMatchers(HttpMethod.POST, "api/v1/order").permitAll()
 
                             .requestMatchers(HttpMethod.GET, "api/v1/orderdetail/**").permitAll()
 

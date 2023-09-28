@@ -1,5 +1,6 @@
 package com.learn_spring_boot.learn_spring_boot.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class OrderDetail {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Order order;
 
     @ManyToOne
@@ -29,7 +31,7 @@ public class OrderDetail {
     @Column(name = "price")
     private Float price;
 
-    @Column(name = "number_of_product", nullable = false)
+    @Column(name = "number_of_products", nullable = false)
     private Integer numberOfProduct;
 
     @Column(name = "total_money")

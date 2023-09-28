@@ -38,6 +38,9 @@ public class OrderController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getOrderById(@PathVariable Long id){
         Order order = orderService.getOrder(id);
+        if(order == null){
+            return ResponseEntity.badRequest().body(ResponseUtil.badRequest("Order id not found"));
+        }
         return ResponseEntity.ok().body(ResponseUtil.ok(order, "Successfully"));
     }
     @GetMapping("/findByUser/{id}")
