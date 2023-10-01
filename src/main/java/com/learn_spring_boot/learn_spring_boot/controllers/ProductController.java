@@ -38,9 +38,9 @@ public class ProductController {
             return ResponseEntity.badRequest().body(ResponseUtil.badRequest(e.getMessage()));
         }
     }
-    @GetMapping("")
-    public ResponseEntity<?> findByNameProduct(@RequestBody ProductDTO productDTO) {
-        Optional<?> listProduct = Optional.ofNullable(productService.findProductByName(productDTO.getName()));
+    @GetMapping("/findByName/{name}")
+    public ResponseEntity<?> findByNameProduct(@PathVariable String name) {
+        Optional<?> listProduct = Optional.ofNullable(productService.findProductByName(name));
         return ResponseEntity.ok(ResponseUtil.ok(listProduct, "Successfully"));
     }
     @GetMapping("/{id}")
