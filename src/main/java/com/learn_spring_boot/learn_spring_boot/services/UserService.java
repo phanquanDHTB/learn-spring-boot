@@ -8,6 +8,7 @@ import com.learn_spring_boot.learn_spring_boot.models.Role;
 import com.learn_spring_boot.learn_spring_boot.models.User;
 import com.learn_spring_boot.learn_spring_boot.repositories.RoleRepository;
 import com.learn_spring_boot.learn_spring_boot.repositories.UserRepository;
+import com.learn_spring_boot.learn_spring_boot.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,7 +55,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String login(String phoneNumber, String password) throws Exception {
+    public UserResponse login(String phoneNumber, String password) throws Exception {
         Optional<User> optionalUser = userRepository.findByPhoneNumber(phoneNumber);
         if(optionalUser.isEmpty()){
             throw new DataNotFoundException("Invalid phone number or password");
@@ -72,7 +73,8 @@ public class UserService implements IUserService {
         //authenticate and generateToken
         authenticationManager.authenticate(authenticationToken);
         String token = jwtTokenProvider.generateToken(existingUser);
-        return token;
+        UserResponse user = UserResponse.toUserResponse(token, existingUser);
+        return user;
     }
 
 }

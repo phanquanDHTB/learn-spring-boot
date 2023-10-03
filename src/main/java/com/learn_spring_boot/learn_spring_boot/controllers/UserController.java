@@ -3,6 +3,7 @@ package com.learn_spring_boot.learn_spring_boot.controllers;
 import com.learn_spring_boot.learn_spring_boot.dtos.UserDTO;
 import com.learn_spring_boot.learn_spring_boot.dtos.UserLoginDTO;
 import com.learn_spring_boot.learn_spring_boot.models.User;
+import com.learn_spring_boot.learn_spring_boot.response.UserResponse;
 import com.learn_spring_boot.learn_spring_boot.services.UserService;
 import com.learn_spring_boot.learn_spring_boot.util.ResponseUtil;
 import jakarta.validation.Valid;
@@ -49,12 +50,12 @@ public class UserController {
             return ResponseEntity.badRequest().body(ResponseUtil.badRequest(errorMessages.get(0)));
         }
         try {
-            String token = userService.login(
+            UserResponse userResponse = userService.login(
                     userLoginDTO.getUsername(),
                     userLoginDTO.getPassword()
             );
             // Trả về token trong response
-            return ResponseEntity.ok().body(ResponseUtil.ok(token));
+            return ResponseEntity.ok().body(ResponseUtil.ok(userResponse));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(
                     ResponseUtil.badRequest(e.getMessage())
