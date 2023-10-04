@@ -69,7 +69,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getuseer")
+    @GetMapping("/getuser")
     public ResponseEntity<?> getToken(HttpServletRequest request) throws Exception {
         String bearerToken = request.getHeader("Authorization").substring(7);
         String phone = jwtTokenProvider.getUserPhoneNumberFromJWT(bearerToken);
