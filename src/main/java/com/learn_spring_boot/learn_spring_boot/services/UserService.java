@@ -77,4 +77,9 @@ public class UserService implements IUserService {
         return user;
     }
 
+    @Override
+    public User getUserFromToken(String phoneNumber) throws Exception {
+        return userRepository.findByPhoneNumber(phoneNumber).orElseThrow(() -> new DataNotFoundException("")) ;
+    }
+
 }
